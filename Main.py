@@ -1,44 +1,40 @@
 from typing import List
 
-def merge_sort(data) -> None:
-  # Write code here
-  if len(data) >1:
-    mid = (len(data))//2
-    data_left = data[:mid]
-    data_right = data[mid:]
-    merge_sort(data_left)
-    merge_sort(data_right)
- 
-    a = 0 # for left_ata
-    b = 0 # for right_data
-    c = 0 # for main_data
+def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+  #Function implementing merging of two sorted arrays
+  #Input: nums1 -> array
+  #       m -> number of elements of nums1
+  #       nums2 -> array
+  #       n -> number of elements of nums2
+  l1 = nums1[:]
+  l2 = nums2[:]
+  curr, i, j = 0, 0, 0
+  while i < m and j < n:
+    if l1[i] < l2[j]:
+      nums1[curr] = l1[i]
+      i += 1
+    else:
+      nums1[curr] = l2[j]
+      j += 1
+    curr += 1
+  while i < m:
+    nums1[curr] = l1[i]
+    curr += 1
+    i += 1
+  while j < n:
+    nums1[curr] = l2[j]
+    curr += 1
+    j += 1
 
-    while a<len(data_left) and b<len(data_right):
-      if data_left[a] <= data_right[b]:
-        data[c] = data_left[a]
-        a+=1
-      else:
-        data[c] = data_right[b]
-        b+=1
-      c+=1
 
-    while a < len(data_left):
-      data[c] = data_left[a]
-      a+=1
-      c+=1
-    while b < len(data_right):
-      data[c] = data_right[b]
-      b+=1
-      c+=1
-    return data
-
-# Do not change the following code
-input_data = input()
-data = []
-for item in input_data.split(', '):
-  if item.isnumeric():
-    data.append(int(item))
-  elif item.lstrip("-").isnumeric():
-    data.append(int(item))
-merge_sort(data)
-print(data)
+# Do noT change the following code
+nums1 = []
+nums2 = []
+for item in input().split(', '):
+  nums1.append(int(item))
+for item in input().split(', '):
+  nums2.append(int(item))
+m = int(input())
+n = int(input())
+merge(nums1, m, nums2, n)
+print(nums1)
